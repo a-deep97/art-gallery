@@ -7,10 +7,17 @@ export default function Lobby({ count, onEnter }) {
     <div className="lobby">
       <div className="lobby__texture" aria-hidden="true" />
 
-      <div className="lobby__frame" aria-hidden="true">
-        <div className="lobby__frame-inner" />
+      <div className="lobby__frame" aria-hidden={!artistInfo.photo}>
+        {artistInfo.photo ? (
+          <img
+            className="lobby__frame-photo"
+            src={`./art/${artistInfo.photo}`}
+            alt={artistInfo.name}
+          />
+        ) : (
+          <div className="lobby__frame-inner" />
+        )}
       </div>
-
       <div className="lobby__content">
         <span className="lobby__eyebrow">Pocket&nbsp;Gallery</span>
 
