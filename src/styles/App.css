@@ -1,0 +1,38 @@
+.app-root {
+  width: 100%;
+  height: 100%;
+  height: var(--vh);
+  position: relative;
+  background: var(--ink);
+}
+
+/* On wide screens (laptops/desktops), present the experience inside a
+   phone-proportioned frame rather than stretching full-bleed — this is a
+   phone-first design, so on desktop we simulate the phone rather than
+   reflowing the layout. Toggle buttons (.gallery__nav) appear here since
+   hover/fine-pointer devices land in this branch. */
+@media (min-width: 700px) {
+  body {
+    background: #0A0908;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  html body #root {
+    width: 420px;
+    height: min(var(--vh), 880px);
+    max-height: 92vh;
+    border-radius: 36px;
+    overflow: hidden;
+    box-shadow:
+      0 40px 100px rgba(0, 0, 0, 0.55),
+      0 0 0 10px #1a1815,
+      0 0 0 11px #2c2925;
+  }
+
+  .app-root {
+    border-radius: 26px;
+    overflow: hidden;
+  }
+}

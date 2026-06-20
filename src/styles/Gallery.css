@@ -1,0 +1,201 @@
+.gallery {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--ink);
+  overflow: hidden;
+}
+
+.gallery__scroller {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.gallery__scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery__panel-wrap {
+  width: 100%;
+  height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* ── Top bar ─────────────────────────────────────────────────────────── */
+.gallery__topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(var(--safe-top) + 16px) 18px 14px;
+  pointer-events: none;
+}
+
+.gallery__back {
+  pointer-events: auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(22, 20, 18, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--paper);
+}
+
+.gallery__back:active {
+  background: rgba(22, 20, 18, 0.65);
+}
+
+.gallery__counter {
+  pointer-events: auto;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(250, 248, 244, 0.75);
+  background: rgba(22, 20, 18, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 8px 13px;
+  border-radius: 999px;
+}
+
+.gallery__topbar-spacer {
+  width: 36px;
+}
+
+/* ── Prev / Next buttons ────────────────────────────────────────────────
+   Hidden by default (phones rely on swipe). Shown only when the device
+   has a precise pointer that can hover — i.e. mouse or trackpad — so
+   laptops get explicit toggle buttons instead of relying on scroll. */
+.gallery__nav {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gallery__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 28;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(22, 20, 18, 0.45);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: var(--paper);
+    transition: background 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .gallery__nav:hover {
+    background: rgba(22, 20, 18, 0.7);
+  }
+
+  .gallery__nav:active {
+    transform: translateY(-50%) scale(0.92);
+  }
+
+  .gallery__nav:disabled {
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  .gallery__nav--prev {
+    left: 14px;
+  }
+
+  .gallery__nav--next {
+    right: 14px;
+  }
+
+  /* On desktop the room rail moves up near the topbar, out of the way of
+     the left/right nav buttons, instead of sharing their vertical band.
+     It also switches from a vertical column to a horizontal row. */
+  .rail {
+    top: calc(var(--safe-top) + 78px);
+    right: 16px;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    max-height: none;
+  }
+
+  .rail__track {
+    flex-direction: row;
+    max-height: none;
+  }
+
+  .rail__dot--active {
+    width: 18px;
+    height: 6px;
+  }
+}
+
+/* ── End of collection panel ────────────────────────────────────────── */
+.gallery__end {
+  width: 100%;
+  height: 100%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #161412 0%, #0E0C0A 100%);
+  padding: 0 40px;
+  text-align: center;
+}
+
+.gallery__end-mark {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--brass-soft);
+  border-radius: 50%;
+  margin-bottom: 22px;
+  position: relative;
+}
+
+.gallery__end-mark::after {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border: 1px solid var(--brass-soft);
+  border-radius: 50%;
+}
+
+.gallery__end-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: rgba(250, 248, 244, 0.55);
+  font-size: 1.05rem;
+  margin: 0 0 26px;
+}
+
+.gallery__end-restart {
+  padding: 13px 26px;
+  border: 1px solid rgba(250, 248, 244, 0.25);
+  border-radius: 999px;
+  color: var(--paper);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.gallery__end-restart:active {
+  background: rgba(250, 248, 244, 0.08);
+}

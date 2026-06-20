@@ -1,0 +1,158 @@
+.lobby {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(196, 64, 43, 0.16), transparent 60%),
+    linear-gradient(180deg, #1B1815 0%, #161412 55%, #100E0C 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.lobby__texture {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, transparent 1px, transparent 3px);
+  pointer-events: none;
+}
+
+/* A single faint suspended frame — like the next room glimpsed through a doorway */
+.lobby__frame {
+  position: absolute;
+  top: calc(var(--safe-top) + 9%);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  max-width: 168px;
+  aspect-ratio: 3 / 4;
+  border: 1px solid rgba(181, 160, 137, 0.22);
+  border-radius: 2px;
+  opacity: 0.55;
+}
+
+.lobby__frame-inner {
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(181, 160, 137, 0.14);
+  background: linear-gradient(160deg, rgba(139,115,85,0.10), rgba(139,115,85,0.02));
+}
+
+.lobby__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 32px;
+  padding-top: 38vh;
+  width: 100%;
+}
+
+.lobby__eyebrow {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brass-soft);
+  margin-bottom: 18px;
+}
+
+.lobby__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 9vw, 3rem);
+  line-height: 1.08;
+  color: var(--paper);
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+}
+
+.lobby__tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: rgba(250, 248, 244, 0.6);
+  margin: 0 0 28px;
+  max-width: 280px;
+}
+
+.lobby__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: rgba(250, 248, 244, 0.45);
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+.lobby__meta-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--vermilion);
+  box-shadow: 0 0 8px rgba(196, 64, 43, 0.8);
+}
+
+.lobby__enter {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 30px;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+}
+
+.lobby__enter:active {
+  transform: scale(0.96);
+}
+
+.lobby__enter svg {
+  transition: transform 0.25s ease;
+}
+
+.lobby__enter:hover svg {
+  transform: translateX(3px);
+}
+
+.lobby__hint {
+  margin-top: 22px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(250, 248, 244, 0.3);
+}
+
+.lobby__hint--pointer {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lobby__hint--touch {
+    display: none;
+  }
+  .lobby__hint--pointer {
+    display: block;
+  }
+}
+
+@media (min-height: 750px) {
+  .lobby__content {
+    padding-top: 40vh;
+  }
+}

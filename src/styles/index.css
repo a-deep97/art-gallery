@@ -1,0 +1,80 @@
+:root {
+  /* ── Palette: gallery wall, not white-cube ─────────────────────────── */
+  --wall: #EDE9E1;          /* gallery wall neutral */
+  --wall-dim: #E2DDD2;      /* wall in shadow */
+  --ink: #161412;           /* near-black, used for text + scrim */
+  --ink-soft: #2A2622;
+  --brass: #8B7355;         /* museum rail / wood accent */
+  --brass-soft: #B5A089;
+  --vermilion: #C4402B;     /* single warm accent — the "docent's red dot" */
+  --paper: #FAF8F4;         /* placard paper */
+  --paper-line: rgba(22, 20, 18, 0.12);
+
+  /* ── Type ──────────────────────────────────────────────────────────── */
+  --font-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* ── Layout ────────────────────────────────────────────────────────── */
+  --vh: 100vh;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overscroll-behavior: none;
+  background: var(--ink);
+}
+
+body {
+  font-family: var(--font-ui);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  width: 100%;
+  height: 100dvh;
+  height: var(--vh);
+  overflow: hidden;
+  position: relative;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+::selection {
+  background: var(--vermilion);
+  color: var(--paper);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--vermilion);
+  outline-offset: 3px;
+}

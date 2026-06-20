@@ -1,0 +1,210 @@
+.panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panel__wall {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(140% 60% at 50% 0%, var(--wall) 0%, var(--wall-dim) 70%, #D8D2C5 100%);
+}
+
+.panel__wall::before {
+  /* subtle wall texture */
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background-image:
+    repeating-linear-gradient(95deg, rgba(0,0,0,0.018) 0px, transparent 1.5px, transparent 4px);
+}
+
+.panel__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 50% 38%, transparent 45%, rgba(22,20,18,0.18) 100%);
+  pointer-events: none;
+}
+
+.panel__canvas-zone {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 9% calc(118px + var(--safe-bottom));
+  padding-top: calc(var(--safe-top) + 64px);
+  z-index: 2;
+}
+
+/* Soft overhead gallery spotlight, like a single track light on this canvas */
+.panel__spotlight {
+  position: absolute;
+  top: -6%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75%;
+  height: 55%;
+  background: radial-gradient(closest-side, rgba(255, 250, 235, 0.5), transparent 72%);
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  z-index: 1;
+}
+
+.panel__frame {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+  max-height: 100%;
+  background: #FFFFFF;
+  padding: 10px;
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.6) inset,
+    0 22px 50px rgba(0, 0, 0, 0.32),
+    0 8px 18px rgba(0, 0, 0, 0.18);
+  border-radius: 1px;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease;
+}
+
+.panel:not(.panel--active) .panel__frame {
+  transform: scale(0.93);
+  opacity: 0.85;
+}
+
+.panel__image {
+  display: block;
+  max-width: 100%;
+  max-height: calc(var(--vh) - 280px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.panel__image--loaded {
+  opacity: 1;
+}
+
+.panel__shimmer {
+  position: absolute;
+  inset: 10px;
+  width: 220px;
+  height: 280px;
+  background: linear-gradient(100deg, #ECE8E0 30%, #F6F3EC 50%, #ECE8E0 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 150% 0; }
+  100% { background-position: -50% 0; }
+}
+
+/* ── Placard toggle handle ──────────────────────────────────────────── */
+.panel__placard-toggle {
+  position: absolute;
+  left: 50%;
+  bottom: calc(86px + var(--safe-bottom));
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: bottom 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.panel__placard-toggle-bar {
+  width: 36px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--brass);
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.panel__placard-toggle--open {
+  bottom: auto;
+  top: 0;
+}
+
+.panel__placard-toggle:active .panel__placard-toggle-bar {
+  opacity: 1;
+}
+
+/* ── Sliding wall placard ───────────────────────────────────────────── */
+.panel__placard {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  background: var(--paper);
+  border-top: 1px solid var(--paper-line);
+  padding: 18px 24px calc(22px + var(--safe-bottom));
+  transform: translateY(calc(100% - 78px - var(--safe-bottom)));
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 -8px 30px rgba(0,0,0,0.12);
+}
+
+.panel__placard--open {
+  transform: translateY(0);
+}
+
+.panel__placard-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.panel__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.panel__year {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--brass);
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+.panel__medium {
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  opacity: 0.65;
+  margin: 0 0 10px;
+  letter-spacing: 0.01em;
+}
+
+.panel__dim {
+  opacity: 0.8;
+}
+
+.panel__note {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  opacity: 0.85;
+  margin: 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--paper-line);
+}
