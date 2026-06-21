@@ -83,7 +83,7 @@ export const artworks = [
    {
      id: '008',
      src: '8.jpeg',
-     title: 'Devine connection',
+     title: 'Divine connection',
      year: '2026',
      medium: 'Pen on paper',
      dimensions: '60 × 80 cm',
